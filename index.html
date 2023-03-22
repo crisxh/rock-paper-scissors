@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!--Css starts here-->
+<style>
+    body{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        padding:0px;
+        height: 100vh;
+    }
+
+    #gameBox{
+        position:relative;
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        justify-items: center;
+        height: 100%;
+        width: 100%;
+        align-items: center;
+        padding:5px;
+        background-color:palegoldenrod;
+        
+    }
+    #buttonBox{
+        display:flex;
+        flex-direction: row;
+ 
+      
+    }
+
+    .output{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        padding:10px;
+        height: 200px;
+        width: 200px;
+        background-color:lightgray;
+    }
+
+    .choice{
+        height: 80px;
+        width: 80px;
+        margin:5px;
+    }
+
+     #go{
+         /* height: 80px;
+         width: 100%; */
+         background-color:green;
+     }
+     #go:hover{
+    background-color:rgb(35, 151, 35);
+    cursor:pointer;
+}
+
+    .gameComponent{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+    
+        width: 100%;
+        margin:15px;
+    }
+    #result{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        height: 80px;
+        width: 160px;
+        background-color:rgb(103, 103, 163);
+        color:white;
+    }
+
+    .choiceImg{
+        width: 80%;
+    }
+
+    #playAgain{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction:column;
+        gap: 5px;
+        position:absolute;
+        top:0;
+        left:0;
+        height: 100%;
+        width: 100%;
+        background-color:rgba(173, 216, 230, 0.701);
+        z-index:99;
+        
+    }
+
+    #playAgainBtn{
+        height: 80px;
+        width: 160px;
+    }
+
+</style>
+
+<!--HTML body starts here-->
+
+
+    <div id="gameBox">
+        <h1>Rock Paper Scissors</h1>
+        <div id="playAgain">
+            <div id="result" class="result">Rock...paper...scissors...</div>
+            <button id="playAgainBtn">Play Again?</button>
+        </div>
+        <div class="gameComponent">
+            <div class="output playerChoice"></div>
+            <button id="go">Go</button>
+        </div>
+        <div class="gameComponent">
+            
+            
+
+        </div>
+        <div id="buttonBox">
+            <button  value="rock" class="rock choice">Rock</button>
+            <button value="paper" class="paper choice">Paper</button>
+            <button value="scissors" class="scissors choice">Scissors</button>
+            
+        </div>
+        <div class="gameComponent">
+            <div class="output computerChoice"></div>
+        </div>
+
+       
+          
+      
+     
+    </div>
+    
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<!--Javascript starts here-->
+    
+
+    <script>
+
+$('#playAgain').css('display','none');
+
+        let rock=$('<img>',{src:'img',class:'choiceImg rock',alt:'rock'});
+        let paper=$('<img>',{src:'img',class:'choiceImg paper',alt:'rock'});
+        let scissors=$('<img>',{src:'img',class:'choiceImg scissors',alt:'rock'});
+
+    let choices=['Rock','Paper','Scissors'];
+    let computer;
+    computer=computerChoice();
+    let player;
+    
+    // computer='rock';
+
+$('.choice').click(function(e){
+    console.log(this);
+    // alert(this.value)});       
+    $('.playerChoice').html(this.value);
+    player=this.value;
+    displayOutput($('.playerChoice'),player);
+})
+
+$('#go').click(()=>{
+    rps(player);
+    $('.computerChoice').html('the computer is choosing...')
+    // displayOutput($('.computerChoice',computer));
+    
+setTimeout(()=>{
+    displayOutput($('.computerChoice'),computer);
+    // $('.computerChoice').html($('<img>',{src:'./rock.png',class:'choiceImg'}))
+
+},500);
+    
+    
+   
+  
+})
+
+
+function computerChoice(){
+    computer=choices[Math.floor(Math.random()*choices.length)];
+    console.log(computer);
+    return computer;
+
+
+}
+
+//main rock paper scissors function with main game logic
+function rps(player){
+  
+    let result=$('#result');
+    if (!player){
+        result.html('make a choice to continue');
+        return;
+    }else  if  (player===computer){
+        result.html(`the computer chose: ${computer} tie!`).css({
+            'backgroundColor':'grey'
+            
+
+        });
+       }else if(player==='rock'&&computer==='scissors' || player==='paper'&&computer==='rock' || player==='scissors'&&computer==='paper' ){
+           result.html(`the computer chose: ${computer} you Win!`).css('backgroundColor','green');
+       } else{
+           result.html(`the computer chose: ${computer}.\n You Lose!`).css('backgroundColor','red');
+       }
+       
+      
+       setTimeout(playAgain,3000);
+
+    }
+
+  
+
+function displayOutput(element,content){
+        let imgOutput=$('<img>',{src:`./${content}.png`,class:'choiceImg'});
+        element.html(imgOutput);
+       }
+
+function playAgain(){
+        computer=computerChoice();
+        $('#playAgain').toggle();
+
+    }
+   
+$('#playAgainBtn').click(playAgain);
+
+    </script>
+</body>
+</html>

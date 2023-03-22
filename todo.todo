@@ -1,0 +1,17 @@
+fix timing
+-computer shouldn't choose if player is null
+-timing of 'play again' overlay is awkward with trying to see the result
+-buttons should not work even before overlay is present
+
+-organize code better
+   -create objects/methods to organize code
+    -function calls right place/right order
+    -simplify what each function does
+    
+
+-styles
+    -responsive
+-UX
+    -find good timing for 'play again' overlay
+    -good place to show result of game
+    -maybe just a button next to the result instead of overlay or results on the overlay 

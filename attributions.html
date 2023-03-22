@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+    <div id="images">
+        <h1>images</h1>
+
+    </div>
+    
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script>
+function Attribution(name,link,author,date,site,license){
+    this.href=link;
+    this.name=name;
+    this.author=author;
+    this.site=site;
+    this.date=date;
+    this.license=license;
+
+}
+
+let attributionObjects=[];
+
+// function(){
+
+// }
+
+let rock = new Attribution('Rock Clipart Transparent #1551783','http://clipart-library.com/clip-art/notebook-paper-transparent-background-8.htm','unknown','clipart-library.com','unknown','personal use');
+let paper = new Attribution('Scissors Clipart Transparent #1553703','http://clipart-library.com/clip-art/scissors-clipart-transparent-24.htm','unknown','clipart-libarary.com','unknown','personal use');
+let scissors = new Attribution('Notebook Paper Transparent Background #1525702','http://clipart-library.com/clip-art/notebook-paper-transparent-background-8.htm','unknown','clipart-libarary.com','unknown','personal use');
+
+console.log(rock);
+console.log(paper);
+console.log(scissors);
+
+function renderAttribution(asset,element){
+let main=element;
+let attrLink=$('<a>',{href:asset.href,class:'attrLink'});
+let attribution=$('<div>',{class:'attribution'}).append(attrLink);
+main.append(attribution);
+
+}
+
+renderAttribution(rock,$('#images'));
+    
+</script>
+    
+</body>
+</html>
+
