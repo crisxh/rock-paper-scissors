@@ -223,7 +223,7 @@ function rps(player){
   
 
 function displayOutput(element,content){
-        let imgOutput=$('<img>',{src:`./${content}.png`,class:'choiceImg'});
+        let imgOutput=$('<img>',{src:`./${content.toLowerCase()}.png`,class:'choiceImg'});
         element.html(imgOutput);
        }
 
